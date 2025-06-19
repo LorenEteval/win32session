@@ -1,0 +1,71 @@
+from setuptools import setup
+from setuptools.extension import Extension
+
+
+class Pybind11Include:
+    """
+    Helper class to determine the pybind11 include path
+
+    The purpose of this class is to postpone importing pybind11
+    until it is actually installed, so that the get_include()
+    method can be invoked.
+    """
+
+    def __str__(self):
+        import pybind11
+
+        return pybind11.get_include()
+
+
+with open('README.md', 'r', encoding='utf-8') as file:
+    long_description = file.read()
+
+
+setup(
+    name='win32session',
+    version='0.1.0',
+    license='MIT',
+    description='Python bindings for win32 session cleanup management.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    author='Loren Eteval',
+    author_email='loren.eteval@proton.me',
+    url='https://github.com/LorenEteval/win32session',
+    # https://pybind11.readthedocs.io/en/stable/changelog.html#version-2-13-0-june-25-2024
+    # For Python 3.6 support
+    setup_requires=['pybind11 < 2.13.0'],
+    install_requires=['pybind11 < 2.13.0'],
+    ext_modules=[
+        Extension(
+            'win32session',
+            ['win32session.cpp'],
+            language='c++11',
+            include_dirs=[
+                # Path to pybind11 headers
+                Pybind11Include(),
+            ],
+            define_macros=[('UNICODE', None), ('_UNICODE', None)],
+            libraries=['user32'],
+        )
+    ],
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: MIT License',
+        'Intended Audience :: Developers',
+        'Programming Language :: C++',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Operating System :: Microsoft :: Windows',
+        'Topic :: Internet',
+        'Topic :: Internet :: Proxy Servers',
+    ],
+    zip_safe=False,
+)
