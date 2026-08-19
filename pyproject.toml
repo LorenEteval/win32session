@@ -1,0 +1,16 @@
+[build-system]
+requires = [
+    "setuptools>=40.8; python_version < '3.8'",
+    "setuptools>=68; python_version >= '3.8'",
+    "wheel",
+    "pybind11>=2.10.4,<2.13; python_version < '3.8'",
+    "pybind11>=3.0.4; python_version >= '3.8'",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.cibuildwheel]
+build = "cp{39,310,311,312,313,313t,314,314t}-win*"
+test-command = "python {project}/sample/sample.py"
+
+[tool.cibuildwheel.windows]
+archs = ["auto64"]
