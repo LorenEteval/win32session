@@ -9,7 +9,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel]
-build = "cp{39,310,311,312,313,313t,314,314t}-win*"
+build = "cp{39,310,311,312,313,314,314t}-win*"
 test-command = "python {project}/sample/sample.py"
 
 [tool.cibuildwheel.windows]
