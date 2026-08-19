@@ -9,7 +9,7 @@ ROOT = Path(__file__).parent
 
 setup(
     name="win32session",
-    version="0.2.0",
+    version="0.2.1",
     license="MIT",
     description="Python bindings for Windows session cleanup management.",
     long_description=(ROOT / "README.md").read_text(encoding="utf-8"),
